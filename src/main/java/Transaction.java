@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class Transaction {
 
-    private String id;
+    private String transactionId;
     private PublicKey sender;
     private PublicKey receiver;
     private float value;
@@ -33,8 +33,7 @@ public class Transaction {
         return Util.toSHA(
             Util.keyToString(sender) +
             Util.keyToString(receiver) +
-            value +
-            id
+            value + transactionId
         );
     }
 
@@ -59,7 +58,7 @@ public class Transaction {
         }
 
         for (TransactionInput input : inputs) {
-            input.setUTXO(Chain.UTXOs.get(input.getId()));
+            input.setUTXO(Chain.UTXOs.get(input.getTransactionOutputId()));
         }
 
         if (getInputsValue() < Chain.minimumTransaction) {
@@ -68,10 +67,10 @@ public class Transaction {
         }
 
         float leftOver = getInputsValue() - value;
-        this.id = calculateHash();
+        this.transactionId = calculateHash();
 
-        this.outputs.add(new TransactionOutput(id, receiver, value));
-        this.outputs.add(new TransactionOutput(id, sender, leftOver));
+        this.outputs.add(new TransactionOutput(transactionId, receiver, value));
+        this.outputs.add(new TransactionOutput(transactionId, sender, leftOver));
 
         for (TransactionOutput output : outputs) {
             Chain.UTXOs.put(output.getId(), output);
@@ -79,7 +78,7 @@ public class Transaction {
 
         for (TransactionInput input : inputs) {
             if (input.getUTXO() == null) continue;
-            Chain.UTXOs.remove(input.getId());
+            Chain.UTXOs.remove(input.getTransactionOutputId());
         }
 
         return true;

@@ -6,14 +6,14 @@ import java.security.PublicKey;
 public class TransactionOutput {
 
     private String id;
-    private String parentId;
+    private String parentTransactionId;
     private PublicKey receiver;
     private float value;
 
-    public TransactionOutput(String parentId, PublicKey receiver, float value) {
-        this.id = Util.toSHA(Util.keyToString(receiver) + value + parentId);
+    public TransactionOutput(String parentTransactionId, PublicKey receiver, float value) {
+        this.id = Util.toSHA(Util.keyToString(receiver) + value + parentTransactionId);
 
-        this.parentId = parentId;
+        this.parentTransactionId = parentTransactionId;
         this.receiver = receiver;
         this.value = value;
     }

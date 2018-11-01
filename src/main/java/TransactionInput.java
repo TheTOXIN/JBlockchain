@@ -3,11 +3,11 @@ import lombok.Data;
 @Data
 public class TransactionInput {
 
-    private String id;
+    private String transactionOutputId;
     private TransactionOutput UTXO;
 
-    public TransactionInput(String id) {
-        this.id = id;
+    public TransactionInput(String transactionOutputId) {
+        this.transactionOutputId = transactionOutputId;
     }
 
 }

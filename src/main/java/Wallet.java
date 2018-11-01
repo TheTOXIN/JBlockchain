@@ -70,7 +70,7 @@ public class Wallet {
         newTransaction.generateSignature(privateKey);
 
         for (TransactionInput input : inputs) {
-            UTXOs.remove(input.getId());
+            UTXOs.remove(input.getTransactionOutputId());
         }
 
         return newTransaction;

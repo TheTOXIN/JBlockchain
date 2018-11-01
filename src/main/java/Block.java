@@ -23,7 +23,7 @@ public class Block {
 
     public String calculateHash() {
         return Util.toSHA(
-            prevHash + timeStamp + + nonce + merkleRoot
+            prevHash + timeStamp + nonce + merkleRoot
         );
     }
 

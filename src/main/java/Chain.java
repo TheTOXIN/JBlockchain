@@ -27,8 +27,8 @@ public class Chain {
         //create genesis transaction, which sends 100 NoobCoin to walletA:
         genesisTransaction = new Transaction(coinbase.getPublicKey(), walletA.getPublicKey(), 100f, null);
         genesisTransaction.generateSignature(coinbase.getPrivateKey());	 //manually sign the genesis transaction
-        genesisTransaction.setId("0"); //manually set the transaction id
-        genesisTransaction.getOutputs().add(new TransactionOutput(genesisTransaction.getId(), genesisTransaction.getReceiver(), genesisTransaction.getValue())); //manually add the Transactions Output
+        genesisTransaction.setTransactionId("0"); //manually set the transaction transactionId
+        genesisTransaction.getOutputs().add(new TransactionOutput(genesisTransaction.getTransactionId(), genesisTransaction.getReceiver(), genesisTransaction.getValue())); //manually add the Transactions Output
         UTXOs.put(genesisTransaction.getOutputs().get(0).getId(), genesisTransaction.getOutputs().get(0)); //its important to store our first transaction in the UTXOs list.
 
         System.out.println("Creating and Mining Genesis block... ");
@@ -106,7 +106,7 @@ public class Chain {
                 }
 
                 for(TransactionInput input: currentTransaction.getInputs()) {
-                    tempOutput = tempUTXOs.get(input.getId());
+                    tempOutput = tempUTXOs.get(input.getTransactionOutputId());
 
                     if(tempOutput == null) {
                         System.out.println("#Referenced input on Transaction(" + t + ") is Missing");
@@ -118,7 +118,7 @@ public class Chain {
                         return false;
                     }
 
-                    tempUTXOs.remove(input.getId());
+                    tempUTXOs.remove(input.getTransactionOutputId());
                 }
 
                 for(TransactionOutput output: currentTransaction.getOutputs()) {
