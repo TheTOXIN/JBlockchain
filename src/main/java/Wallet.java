@@ -13,7 +13,7 @@ public class Wallet {
     private PrivateKey privateKey;
     private PublicKey publicKey;
 
-    public Map<String,TransactionOutput> UTXOs = new HashMap<>();
+    public Map<String, TransactionOutput> UTXOs = new HashMap<>();
 
     public Wallet() {
         generateKeyPair();
@@ -41,7 +41,7 @@ public class Wallet {
         for (Map.Entry<String, TransactionOutput> item : Chain.UTXOs.entrySet()) {
             TransactionOutput UTXO = item.getValue();
             if (UTXO.itsMe(publicKey)) {
-                UTXOs.put(UTXO.getId(), UTXO);
+                UTXOs.put(UTXO.getId(), UTXO);//TODO вынесьт запонение
                 total += UTXO.getValue();
             }
         }

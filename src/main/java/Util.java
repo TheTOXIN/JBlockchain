@@ -50,27 +50,27 @@ public class Util {
         }
     }
 
+    //TODO Заменить на рекурсию
     public static String makeMerkleRoot(List<Transaction> transactions) {
-        int count = transactions.size();
-
-        ArrayList<String> prevTreeLayer = new ArrayList<>();
+        List<String> prevTreeLayer = new ArrayList<>();
 
         for (Transaction transaction : transactions) {
-            prevTreeLayer.add(transaction.getId());
+            prevTreeLayer.add(transaction.getTransactionId());
         }
 
-        ArrayList<String> treeLayer = prevTreeLayer;
+        List<String> treeLayer = prevTreeLayer;
 
-        while (count > 1) {
+        while (treeLayer.size() > 1) {
             treeLayer = new ArrayList<>();
-            for (int i = 1; i < prevTreeLayer.size(); i++) {
-                treeLayer.add(toSHA(prevTreeLayer.get(i - 1) + prevTreeLayer.get(i)));
+            for (int i = 0; i < prevTreeLayer.size() - 1; i++) {
+                treeLayer.add(toSHA(prevTreeLayer.get(i) + prevTreeLayer.get(i + 1)));
             }
-            count = treeLayer.size();
             prevTreeLayer = treeLayer;
         }
 
-        return (treeLayer.size() == 1) ? treeLayer.get(0) : "";
+        if (treeLayer.size() != 1) return "";//TODO SUKA
+
+        return treeLayer.get(0);
     }
 
     public static String makeProfString(int difficulty) {
@@ -80,6 +80,5 @@ public class Util {
     public static String keyToString(Key key) {
         return Base64.getEncoder().encodeToString(key.getEncoded());
     }
-
 
 }
