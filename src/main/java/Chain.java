@@ -1,11 +1,13 @@
+import com.google.gson.GsonBuilder;
+
 import java.security.Security;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Chain {
 
-    public static ArrayList<Block> blockchain = new ArrayList<Block>();
-    public static HashMap<String,TransactionOutput> UTXOs = new HashMap<String,TransactionOutput>();
+    public static ArrayList<Block> blockchain = new ArrayList<>();
+    public static HashMap<String,TransactionOutput> UTXOs = new HashMap<>();
 
     public static int difficulty = 3;
     public static float minimumTransaction = 0.1f;
@@ -58,6 +60,7 @@ public class Chain {
 
         isChainValid();
 
+        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(blockchain));
     }
 
     public static Boolean isChainValid() {
