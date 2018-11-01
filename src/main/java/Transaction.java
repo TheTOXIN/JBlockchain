@@ -17,6 +17,8 @@ public class Transaction {
     private List<TransactionInput> inputs = new ArrayList<>();
     private List<TransactionOutput> outputs = new ArrayList<>();
 
+    private static int sequence = 0;
+
     public Transaction(
         PublicKey sender,
         PublicKey receiver,
@@ -33,7 +35,7 @@ public class Transaction {
         return Util.toSHA(
             Util.keyToString(sender) +
             Util.keyToString(receiver) +
-            value + transactionId
+            value + ++sequence
         );
     }
 
