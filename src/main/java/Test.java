@@ -5,8 +5,8 @@ public class Test {
 
     public static void testChain() {
         Block block0 = new Block(Initer.genesisBlock.getHash());
-        System.out.println("\nWallet COINBASE balance is: " + Initer.genesisWallet.computeBalance());
-        System.out.println("\nWallet COINBASE is Attempting to send funds (100) to WalletA...");
+        System.out.println("\nCOINBASE: " + Initer.genesisWallet.computeBalance());
+        System.out.println("\nCOINBASE -> WalletA : 100");
         block0.addTransaction(Initer.genesisWallet.sendCoins(walletA.getPublicKey(), 100f));
         addBlock(block0);
 
@@ -14,7 +14,7 @@ public class Test {
         logBalance();
 
         Block block1 = new Block(block0.getHash());
-        System.out.println("\nWalletA is Attempting to send funds (40) to WalletB...");
+        System.out.println("\nWalletA -> WalletB : 40");
         block1.addTransaction(walletA.sendCoins(walletB.getPublicKey(), 40f));
         addBlock(block1);
 
@@ -22,7 +22,7 @@ public class Test {
         logBalance();
 
         Block block2 = new Block(block1.getHash());
-        System.out.println("\nWalletA Attempting to send more funds (1000) than it has...");
+        System.out.println("\nWalletA -> WalletB : 1000 than it has...");
         block2.addTransaction(walletA.sendCoins(walletB.getPublicKey(), 1000f));
         addBlock(block2);
 
@@ -30,7 +30,7 @@ public class Test {
         logBalance();
 
         Block block3 = new Block(block2.getHash());
-        System.out.println("\nWalletB is Attempting to send funds (20) to WalletA...");
+        System.out.println("\nWalletB -> WalletA : 20");
         block3.addTransaction(walletB.sendCoins(walletA.getPublicKey(), 20));
         addBlock(block3);
 

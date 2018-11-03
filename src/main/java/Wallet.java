@@ -38,10 +38,9 @@ public class Wallet {
     public float computeBalance() {
         float total = 0;
 
-        for (Map.Entry<String, TransactionOutput> item : Chain.UTXOs.entrySet()) {
-            TransactionOutput UTXO = item.getValue();
+        for (TransactionOutput UTXO : Chain.UTXOs.values()) {
             if (UTXO.itsMe(publicKey)) {
-                UTXOs.put(UTXO.getId(), UTXO);//TODO вынесьт запонение
+                UTXOs.put(UTXO.getId(), UTXO);
                 total += UTXO.getValue();
             }
         }
@@ -59,8 +58,7 @@ public class Wallet {
 
         float total = 0;
 
-        for (Map.Entry<String, TransactionOutput> item : UTXOs.entrySet()) {
-            TransactionOutput UTXO = item.getValue();
+        for (TransactionOutput UTXO : UTXOs.values()) {
             total += UTXO.getValue();
             inputs.add(new TransactionInput(UTXO.getId()));
             if (total > value) break;

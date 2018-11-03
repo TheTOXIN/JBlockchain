@@ -50,7 +50,6 @@ public class Util {
         }
     }
 
-    //TODO Заменить на рекурсию
     public static String makeMerkleRoot(List<Transaction> transactions) {
         List<String> prevTreeLayer = new ArrayList<>();
 
@@ -68,7 +67,7 @@ public class Util {
             prevTreeLayer = treeLayer;
         }
 
-        if (treeLayer.size() != 1) return "";//TODO SUKA
+        if (treeLayer.size() != 1) return "";
 
         return treeLayer.get(0);
     }

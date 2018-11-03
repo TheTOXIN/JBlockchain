@@ -8,7 +8,8 @@ public class Validation {
         String hashTarget = Util.makeProfString(Const.DIFCLT);
 
         HashMap<String, TransactionOutput> tempUTXOs = new HashMap<>();
-        tempUTXOs.put(Initer.genesisTransaction.getOutputs().get(0).getId(), Initer.genesisTransaction.getOutputs().get(0));
+        TransactionOutput genesisOutput = Initer.genesisTransaction.getOutputs().get(0);
+        tempUTXOs.put(genesisOutput.getId(), genesisOutput);
 
         for (int i = 1; i < Chain.BLOCKCHAIN.size(); i++) {
             currentBlock = Chain.BLOCKCHAIN.get(i);

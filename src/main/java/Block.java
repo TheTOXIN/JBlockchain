@@ -27,7 +27,6 @@ public class Block {
         );
     }
 
-    //TODO добавить вознаграждение
     public void mineBlock(int difficulty) {
         merkleRoot = Util.makeMerkleRoot(transactions);
         String target = Util.makeProfString(difficulty);
@@ -43,7 +42,6 @@ public class Block {
     public boolean addTransaction(Transaction transaction) {
         if (transaction == null) return false;
 
-        //TODO убрать дерьмо для первого блока
         if (!prevHash.equals("0")) {
             if (!transaction.processTransaction()) {
                 System.out.println("TRANSACTION ADD FAILED");
