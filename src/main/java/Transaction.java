@@ -63,7 +63,7 @@ public class Transaction {
             input.setUTXO(Chain.UTXOs.get(input.getTransactionOutputId()));
         }
 
-        if (getInputsValue() < Chain.minimumTransaction) {
+        if (getInputsValue() < Const.MIN_TX) {
             System.out.println("TRANSACTION INPUTS TO SMALL");
             return false;
         }
